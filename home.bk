@@ -1,0 +1,21 @@
+#!/bin/bash
+# Questa procedura esegue il salvataggio della directory /home
+# sul filesystem /databackup.
+# Utilizza il comando "tar cvjf".
+#
+# Per estrarre il contenuto del file ottenuto, occorre posizionarsi
+# in una directory di appoggio e dare il comando:
+# tar xvjf nome_file.tar.bz2
+#
+# Per visualizzare il contenuto del file ottenuto si utilizza il comando:
+# tar tvjf nome_file.tar.bz2
+#
+#
+cd /
+tar cvjf /databackup/home_`date +"%d-%m-%y"`.tar.bz2 home
+#
+echo "E' stato eseguito il backup di /home in data `date +"%d-%m-%y"`" > /utility/backup/home-bk.msg
+mail elena.moroni@unifi.it < /utility/backup/home-bk.msg
+rm /utility/backup/home-bk.msg
+
+exit 0

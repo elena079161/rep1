@@ -1,0 +1,25 @@
+#!/bin/bash
+# Questa procedura esegue il salvataggio della directory /etc sul filesystem
+# /databackup. Tale directory contiene:
+# i file di configurazione del TCP/IP
+# i file di configurazione di Apache
+# i file di definizione degli utenti (passwd e shadow)
+# i file di configurazione dei processi per lo Startup del Sistema
+# Utilizza il comando "tar cvjf".
+#
+# Per estrarre il contenuto del file ottenuto, occorre posizionarsi
+# nella directory / oppure in una directory di appoggio e
+# dare il comando:
+# tar xvjf nome_file.tar.bz2
+#
+# Per visualizzare il contenuto del file ottenuto si utilizza il comando:
+# tar tvjf nome_file.tar.bz2
+#
+cd /
+tar cvjf /databackup/etc_`date +"%d-%m-%y"`.tar.bz2 etc
+#
+echo "E' stato eseguito il backup di /etc in data `date +"%d-%m-%y"`" > /utility/backup/etc-bk.msg
+#mail elena.moroni@unifi.it < /utility/backup/etc-bk.msg
+rm /utility/backup/etc-bk.msg
+
+exit 0
